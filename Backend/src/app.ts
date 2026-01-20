@@ -14,13 +14,18 @@ const allowedOrigins = [
   "http://localhost:5173",
 ];
 
+// In production, allow requests from same origin (nginx proxy) or no origin
+const isProduction = process.env.NODE_ENV === "production";
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      // allow requests with no origin (like Postman, curl)
+      // allow requests with no origin (like Postman, curl, or same-origin requests)
       if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
+      // In production, allow all origins since requests come through nginx proxy
+      // In development, only allow specific origins
+      if (isProduction || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
 

@@ -2,7 +2,14 @@ import axios from "axios";
 import { getToken } from "../utils/token";
 
 function normalizeBaseURL(raw?: string) {
-  if (!raw) return "/api";
+  // In production (behind nginx), always use relative URLs
+  // This ensures requests go through nginx proxy to backend
+  if (import.meta.env.PROD) {
+    return "/api";
+  }
+  
+  // In development, use provided URL or default to localhost
+  if (!raw) return "http://localhost:5000/api";
   const trimmed = raw.replace(/\/+$/, "");
   if (trimmed.endsWith("/api")) return trimmed;
   return `${trimmed}/api`;
