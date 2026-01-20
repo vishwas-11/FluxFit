@@ -4,8 +4,11 @@ services:
     container_name: ai-service
     env_file:
       - ./ai-service/.env
-    ports:
-      - "6000:6000"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    restart: unless-stopped
 
   backend:
     build: ./Backend
@@ -13,17 +16,25 @@ services:
     env_file:
       - ./Backend/.env
     environment:
-      # Use Docker service name so backend can reach ai-service (localhost would point to backend itself)
-      - AI_SERVICE_URL=http://ai-service:6000/api/internal
-    ports:
-      - "5000:5000"
+      - AI_SERVICE_URL=http://ai-service:6000
+      - NODE_ENV=production
     depends_on:
       - ai-service
+    deploy:
+      resources:
+        limits:
+          memory: 384M
+    restart: unless-stopped
 
   frontend:
     build: ./frontend
     container_name: frontend
     ports:
-      - "5173:80"
+      - "80:80"
     depends_on:
       - backend
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    restart: unless-stopped
