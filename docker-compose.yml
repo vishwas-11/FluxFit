@@ -1,0 +1,29 @@
+services:
+  ai-service:
+    build: ./ai-service
+    container_name: ai-service
+    env_file:
+      - ./ai-service/.env
+    ports:
+      - "6000:6000"
+
+  backend:
+    build: ./Backend
+    container_name: backend
+    env_file:
+      - ./Backend/.env
+    environment:
+      # Use Docker service name so backend can reach ai-service (localhost would point to backend itself)
+      - AI_SERVICE_URL=http://ai-service:6000/api/internal
+    ports:
+      - "5000:5000"
+    depends_on:
+      - ai-service
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
