@@ -17,8 +17,8 @@ app.get("/health", (_req, res) => {
   });
 });
 
-app.use('/api/internal/recommend', aiRateLimiter, recommendRoutes)
-app.use('/api/youtube', youtubeRoutes)
+app.use('/recommend', aiRateLimiter, recommendRoutes)
+app.use('/youtube', youtubeRoutes)
 app.use(errorHandler)
 
 export default app;
