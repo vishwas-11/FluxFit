@@ -24,7 +24,7 @@ export const recommendVideos = async (req: Request, res: Response) => {
     })();
 
     const response = await axios.post(
-      `${aiServiceOrigin}/youtube/recommend`,
+      `${aiServiceOrigin}/api/youtube/recommend`,
       { query },
       {
         headers: {
