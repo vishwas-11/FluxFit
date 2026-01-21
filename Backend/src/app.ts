@@ -50,11 +50,11 @@ app.get("/health", (_req, res) => {
   });
 });
 
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/logs', logRoutes);
-app.use("/api/ai", aiRoutes);
-app.use("/api/youtube", youtubeRoutes);
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
+app.use('/logs', logRoutes);
+app.use("/ai", aiRoutes);
+app.use("/youtube", youtubeRoutes);
 
 
 app.use(errorHandler);
