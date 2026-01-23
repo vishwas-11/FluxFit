@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import { useNavigate } from 'react-router-dom';
 
 // --- CONFIGURATION: MENU CARDS ---
 const NAV_ITEMS = [
@@ -56,6 +57,7 @@ export default function Navbar() {
   const navRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const navigate = useNavigate();
 
   // --- ANIMATION LOGIC ---
   const calculateHeight = () => {
@@ -167,7 +169,7 @@ export default function Navbar() {
           </div>
 
           {/* 3. CTA BUTTON (Right) */}
-          <button className="hidden md:block px-6 py-2 rounded-full bg-[#00f3ff] text-black font-bold hover:bg-white hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] transition-all text-sm tracking-wide z-30">
+          <button onClick={() => navigate("/recommend")} className="hidden md:block px-6 py-2 rounded-full bg-[#00f3ff] text-black font-bold hover:bg-white hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] transition-all text-sm tracking-wide z-30">
             GET STARTED
           </button>
           {/* Mobile CTA Icon */}
