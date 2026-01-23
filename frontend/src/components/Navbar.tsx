@@ -169,7 +169,7 @@ export default function Navbar() {
           </div>
 
           {/* 3. CTA BUTTON (Right) */}
-          <button onClick={() => navigate("/recommend")} className="hidden md:block px-6 py-2 rounded-full bg-[#00f3ff] text-black font-bold hover:bg-white hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] transition-all text-sm tracking-wide z-30">
+          <button onClick={() => navigate("/login")} className="hidden md:block px-6 py-2 rounded-full bg-[#00f3ff] text-black font-bold hover:bg-white hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] transition-all text-sm tracking-wide z-30">
             GET STARTED
           </button>
           {/* Mobile CTA Icon */}
